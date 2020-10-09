@@ -21,5 +21,5 @@ app.post("/sign-up", (req, res) => {   // req ds la db
 
 
 app.listen(port, () => {
-    console.log('connected')
+    console.log('enfin')
 })
