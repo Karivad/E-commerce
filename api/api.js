@@ -16,14 +16,18 @@ app.post("/sign-up", (req, res) => {   // req ds la db
   const name = req.body.name
   const email = req.body.email
   const password =  req.body.password
+  const image = req.body.image
   // console.log(name,email,password); 
 
   bcrypt.hash(password, saltRounds, (err, hash) => {
     if (err) throw err
-    let insertUser = `INSERT INTO users (name, email, password) VALUES ('${name}', '${email}', '${hash}');`;
+    let insertUser = `INSERT INTO users (name, email, password, image) VALUES ("${name}", "${email}", "${hash}", "${image}")`;
+    console.log(insertUser)
 
     conn.query(insertUser, (err, result) => {
+    console.log(result)
     if (err) throw err
+    
     res.send(`${name} a été ajouté à la DB`)
 
     });
