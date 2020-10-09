@@ -28,7 +28,7 @@ app.post("/sign-up", (req, res) => {   // req ds la db
     console.log(result)
     if (err) throw err
     
-    res.send(`${name} a été ajouté à la DB`)
+    res.send(`${name} a bien été ajouté à la DB`)
 
     });
     
