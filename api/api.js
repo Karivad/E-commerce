@@ -100,13 +100,44 @@ app.get("/products", (req, res) => {
         })
     })
 
-app.get("/users/:id", (req, res) => {
+app.get("/users/:id", (req, res) => {                                   // exemple = users/1 etc
+    const id = req.params.id                                           // params = ds le champs (recup)
+    conn.query(`SELECT * FROM users WHERE id = ${id}`, function (err, result) {
+        console.log(result);
+        if (err) throw err
+        let myUser = result[0]
+    conn.query(`SELECT titre FROM products WHERE user_affiliate_id = ${id}`, function (err, result) {
+        if (err) throw err
+        myUser.products = []
+        result.forEach(product => {
+            myUser.products.push(product.titre)                 /// push "titre" de la db inside le tableau vide
+        })
+        res.send(myUser)
+    })    
+        
+})
 
 })
 
-
-
 app.get("/products/:id", (req, res) => {
+    const id = req.params.id
+
+    conn.query(`SELECT * FROM products WHERE id = ${id}`, function (err, result) {
+        console.log(result);
+        if (err) throw err
+        let myProduct = result[0]
+
+    conn.query(`SELECT name FROM users WHERE id = ${myProduct.user_affiliate_id}`, function (err, result) {
+        if (err) throw err
+        myProduct.seller = []
+        result.forEach(user => {
+        myProduct.seller.push(user.name)                
+        })
+        res.send(myProduct)
+        
+        })
+
+    })
 
 })
     
@@ -118,5 +149,7 @@ app.get("/products/:id", (req, res) => {
 
 app.listen(port, () => {
     console.log('enfin')
-})
+
+    })
+
 
