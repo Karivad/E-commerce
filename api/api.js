@@ -46,7 +46,7 @@ app.post("/sign-up", (req, res) => {   // req ds la db
   
 })  
 
- app.post("/sign-in", (req, res) => {
+app.post("/sign-in", (req, res) => {
     const email = req.body.email
     const password =  req.body.password
     console.log(email, password);
@@ -76,16 +76,40 @@ app.post("/sign-up", (req, res) => {   // req ds la db
     })
  })
 
-    app.post("/products", (req,res) => {
+app.post("/products", (req,res) => {
         const titre = req.body.titre
         const description = req.body.description
-        const prix = req.body.prix
+        const prix = parseFloat(req.body.prix)
         const image = req.body.image
-        const stock = req.body.stock
+        const stock = parseInt(req.body.stock)
         const user_affiliate_id = req.body.user_affiliate_id
+
+        const insertProduct = `INSERT INTO products (titre, description, prix, image, stock, user_affiliate_id) VALUES ("${titre}", "${description}", "${prix}", "${image}", "${stock}", "${user_affiliate_id}")`
+
+        conn.query(insertProduct, (err, result) => {
+            if (err) throw err
+            res.send(`Le produit ${titre} a bien été ajouté à la DB`)
+        })
     })
 
-    conn.query(`INSERT INTO products (titre, description, prix, image, stock, user_affiliate_id) VALUES ("${titre}", "${description}", "${prix}"))
+
+app.get("/products", (req, res) => {
+        conn.query("SELECT * FROM products", (err, result) => {
+            if (err) throw err
+            res.status(500).send(result)
+        })
+    })
+
+app.get("/users/:id", (req, res) => {
+
+})
+
+
+
+app.get("/products/:id", (req, res) => {
+
+})
+    
 
 
 
