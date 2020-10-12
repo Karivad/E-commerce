@@ -9,6 +9,19 @@ const jwt = require('jsonwebtoken')
 
 app.use(express.urlencoded({extended: false}))
 
+
+app.use('/products', (req, res, next) => {
+    const ourToken = req.headers.authorization         //Token recupéré par le header (on met le token dans le header lors du axios)
+    jwt.verify(ourToken, config.secret, (err, decoded) => {
+        if (err) {                                      // err => Le token n'est pas valide
+            res.status(404).send('Accès impossible')
+        }
+        else {
+            res.status(500).send('Accès autorisé')
+            next()                                      //Permet de passer au GET ou au POST 
+        }
+    })
+})
                 // structure des 3 app //
 
 
