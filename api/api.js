@@ -1,16 +1,24 @@
 const express = require("express") // call l'install
 const app = express()               // call function
 const conn = require("./db")
+const config = require("./config")
 const port = 3000
 const bcrypt = require('bcrypt')
 const saltRounds = 10
+const jwt = require('jsonwebtoken')
 
 app.use(express.urlencoded({extended: false}))
 
                 // structure des 3 app //
 
 
-app.get()
+app.get("/users", (req, res) => {
+    conn.query("SELECT id, name FROM users", function (err, result) {
+        console.log(result);
+        if (err) throw err 
+        res.send(result)
+    })
+})
 
 
 app.post("/sign-up", (req, res) => {   // req ds la db
@@ -43,9 +51,12 @@ app.post("/sign-up", (req, res) => {   // req ds la db
     const password =  req.body.password
     console.log(email, password);
 
-    conn.query(`SELECT * FROM users WHERE email = '${req.body.email}'`, function(err, result){
+    conn.query(`SELECT * FROM users WHERE email = '${req.body.email}'`, function(err, result){      //conn.query = link to mysql
         if (err) throw err
         console.log(result[0]);
+
+        let token = jwt.sign({email: result[0].email, id: result[0].id}, config.secret)
+        console.log(token);
 
         if (result.length < 1){               
             res.status(401).send("Incorrect")     // wrong or missing email from db => 401
@@ -54,7 +65,7 @@ app.post("/sign-up", (req, res) => {   // req ds la db
             bcrypt.compare(password, hashed, function (err, result){
                 if (result) {
 
-                    res.status(200).send("Vous êtes connecté !")
+                    res.status(200).send({token: token})  // renvoi le token en réponse
                 
                 } else {
 
