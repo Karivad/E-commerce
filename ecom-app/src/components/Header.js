@@ -1,0 +1,1 @@
+import React from "react";           // add import in every components !
