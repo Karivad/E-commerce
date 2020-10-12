@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 class Header extends React.Component {
   constructor() {
@@ -20,29 +20,25 @@ class Header extends React.Component {
                 E-commerce
               </Nav.Link>
             </Nav.Item>
-            <Link to="/sign-up">
-            <Nav.Item>
-                <Nav.Link>Sign-up</Nav.Link>
-            </Nav.Item>
-            </Link>
-            <Link to="/sign-in">
-            <Nav.Item>          
-                <Nav.Link>Sign-in</Nav.Link>
-            </Nav.Item>
-            </Link>
+              <Nav.Item>
+                <Nav.Link href="/sign-up">Sign-up</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link href="/sign-in">Sign-in</Nav.Link>
+              </Nav.Item>
           </Nav>
-                                             {/* import */}
+          {/* import */}
           <Switch>
             <Route path="/sign-in">
               <SignIn />
             </Route>
-            <Route path="/sign-up">
+            <Route exact path="/sign-up">
               <SignUp />
             </Route>
           </Switch>
-          </Router>
+        </Router>
       </div>
-      
+
     );
   }
 }
