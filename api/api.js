@@ -76,6 +76,16 @@ app.post("/sign-up", (req, res) => {   // req ds la db
     })
  })
 
+    app.post("/products", (req,res) => {
+        const titre = req.body.titre
+        const description = req.body.description
+        const prix = req.body.prix
+        const image = req.body.image
+        const stock = req.body.stock
+        const user_affiliate_id = req.body.user_affiliate_id
+    })
+
+    conn.query(`INSERT INTO products (titre, description, prix, image, stock, user_affiliate_id) VALUES ("${titre}", "${description}", "${prix}"))
 
 
 
