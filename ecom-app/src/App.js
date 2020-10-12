@@ -1,11 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
+import Header from "./components/Header";    
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
   return (
     <div className="App">
-      <h1>E-commerce Project</h1>
+      <Header />
      
     </div>
   );
