@@ -21,6 +21,7 @@ class SignUp extends Component {
 
     handleChange = event => {
         const targetName = event.target.name
+
         this.setState({[targetName]: event.target.value})  
 
         
@@ -28,6 +29,7 @@ class SignUp extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        
         console.log(this.state)
     }
 
