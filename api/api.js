@@ -158,8 +158,6 @@ app.get("/products/:id", (req, res) => {
 
 
 
-
-
 app.listen(port, () => {
     console.log('enfin')
 
