@@ -13,16 +13,22 @@ class SignUp extends Component {
             email: '',
             password: '',
             confirm: '',
-            image: '',
+            image: ''
         };
 
 
       }
 
     handleChange = event => {
-        const param = event.target.name
-        this.setState({`${event.target.name}`: event.target.value})  
-        console.log(this.state);
+        const targetName = event.target.name
+        this.setState({[targetName]: event.target.value})  
+
+        
+    }
+
+    handleSubmit = event => {
+        event.preventDefault();
+        console.log(this.state)
     }
 
 
@@ -30,7 +36,7 @@ class SignUp extends Component {
         return (
             <div>
                 <h1>Sign Up</h1>
-<Form>
+<Form onSubmit={this.handleSubmit}>
   <Form.Group controlId="formBasicName">
     <Form.Label>Name</Form.Label>
     <Form.Control type="text" placeholder="Name" name="name" onChange={this.handleChange} />
