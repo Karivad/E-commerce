@@ -39,7 +39,7 @@ class SignUp extends Component {
                 image: this.state.image,
 
             }  
-            axios.post(`http://localhost:8080/sign-up`, {user})
+            axios.post(`http://localhost:8080/sign-up`, user)
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
@@ -98,7 +98,7 @@ class SignUp extends Component {
   </Form.Group>
 
   <Button variant="warning" type="submit">
-    Sign In
+    Sign Up
   </Button>
 </Form>
 

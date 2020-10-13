@@ -9,7 +9,7 @@ const saltRounds = 10
 const jwt = require('jsonwebtoken')
 
 app.use(express.urlencoded({extended: false}))
-
+app.use(express.json())
 app.use(cors());
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -46,7 +46,7 @@ app.post("/sign-up", (req, res) => {   // req ds la db
   const email = req.body.email
   const password =  req.body.password
   const image = req.body.image
-  // console.log(name,email,password); 
+  console.log(req.body); 
 
   bcrypt.hash(password, saltRounds, (err, hash) => {
     if (err) throw err
