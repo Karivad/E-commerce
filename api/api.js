@@ -1,5 +1,6 @@
 const express = require("express") // call l'install
 const app = express()               // call function
+const cors = require('cors');
 const conn = require("./db")
 const config = require("./config")
 const port = 8080
@@ -9,6 +10,11 @@ const jwt = require('jsonwebtoken')
 
 app.use(express.urlencoded({extended: false}))
 
+app.use(cors());
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    next(); 
+})
 
 app.use('/products', (req, res, next) => {
     const ourToken = req.headers.authorization         //Token recupéré par le header (on met le token dans le header lors du axios)

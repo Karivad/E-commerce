@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 
 
@@ -13,9 +14,9 @@ class SignUp extends Component {
             email: '',
             password: '',
             confirm: '',
-            image: ''
+            image: '',
+            msg: '',
         };
-
 
       }
 
@@ -29,8 +30,29 @@ class SignUp extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        
-        console.log(this.state)
+        if(this.state.password === this.state.confirm) {
+            const user = {                                      // objet user envoyé à Axios
+                name: this.state.name,
+                last: this.state.last,
+                email: this.state.email,
+                password: this.state.password,
+                image: this.state.image,
+
+            }  
+            axios.post(`http://localhost:8080/sign-up`, {user})
+                .then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                })
+
+
+            console.log(this.state)
+        } else {
+            console.log("Wrong password");
+            this.setState({msg: "wrong password"})  
+
+        }
+       
     }
 
 
@@ -65,6 +87,9 @@ class SignUp extends Component {
   <Form.Group controlId="formBasicConfirm">
     <Form.Label>Confirm Password</Form.Label>
     <Form.Control type="password" placeholder="Confirm password" name="confirm" onChange={this.handleChange} />
+    <Form.Text className="text-danger" >
+      {this.state.msg}
+    </Form.Text>
   </Form.Group>
 
 <Form.Group controlId="formBasicPicture">
