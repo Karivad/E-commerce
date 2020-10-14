@@ -66,20 +66,26 @@ app.post("/sign-up", (req, res) => {   // req ds la db
 })  
 
 app.post("/sign-in", (req, res) => {
+    // const name = req.body.name
     const email = req.body.email
     const password =  req.body.password
     console.log(email, password);
 
     conn.query(`SELECT * FROM users WHERE email = '${req.body.email}'`, function(err, result){      //conn.query = link to mysql
-        if (err) throw err
+        if (err) {
+            console.log(err);
+            throw err 
+        }
         console.log(result[0]);
 
-        let token = jwt.sign({email: result[0].email, id: result[0].id}, config.secret)
-        console.log(token);
 
         if (result.length < 1){               
             res.status(401).send("Incorrect")     // wrong or missing email from db => 401
         } else {
+
+            let token = jwt.sign({email: result[0].email, id: result[0].id}, config.secret)
+            console.log(token);
+
             let hashed = result[0].password      // TextRow in terminal = Result
             bcrypt.compare(password, hashed, function (err, result){
                 if (result) {
