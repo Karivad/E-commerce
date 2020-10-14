@@ -32,8 +32,13 @@ class SignIn extends Component {
       
         axios.post(`http://localhost:8080/sign-in`, user)
             .then(res => {
-                console.log("ok",res);
-                console.log(res.data);
+                if (res) {
+                    console.log("vous êtes bien connecté",res);
+                    console.log(res.data);
+                } else {
+                    console.log("password ou email erroné");
+                }
+             
             })
     } 
 
