@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import {userLogin} from '../actions/userLogin'
 
 
 
@@ -40,7 +42,10 @@ class SignIn extends Component {
             .catch((err) => {
                 console.log("password ou email erroné");
             })
-    } 
+    }
+    changeIsLogged = () => {
+      this.props.userLogin()
+    }
 
     render() {
         return (
@@ -70,6 +75,8 @@ class SignIn extends Component {
     Sign In
   </Button>
 </Form>
+<button onClick={this.changeIsLogged}>Display True</button>
+{this.props.isLogged && <h2>True</h2>}
 
 
             </div>
@@ -77,4 +84,16 @@ class SignIn extends Component {
     }
 }
 
-export default SignIn;
+function mapStateToProps(state) {
+  return {
+      isLogged: state.isLogged.isUserLogged
+  };
+}
+
+const mapDispatchToProps = {
+  userLogin
+}
+
+export default connect(
+  mapStateToProps, mapDispatchToProps
+)(SignIn);

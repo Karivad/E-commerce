@@ -83,7 +83,7 @@ app.post("/sign-in", (req, res) => {
             res.status(401).send("Incorrect")     // wrong or missing email from db => 401
         } else {
 
-            let token = jwt.sign({email: result[0].email, id: result[0].id}, config.secret)
+            let token = jwt.sign({email: result[0].email, id: result[0].id, image: result[0].image} , config.secret)
             console.log(token);
 
             let hashed = result[0].password      // TextRow in terminal = Result
