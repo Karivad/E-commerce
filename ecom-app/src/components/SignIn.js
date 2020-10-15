@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import {userLogin} from '../actions/userLogin'
+const jwt = require('jsonwebtoken')
 
 
 
@@ -34,17 +35,24 @@ class SignIn extends Component {
       
         axios.post(`http://localhost:8080/sign-in`, user)
             .then(res => {
-           
-                    console.log("vous êtes bien connecté",res);
-                    console.log(res.data);
+              const token = res.data.token
+             try {
+              let decoded = jwt.decode(token)
+              decoded.token = token
+              console.log(decoded)
+              this.changeIsLogged(decoded)
+            } 
+            catch (err) {
+              console.log(err)
+            }
             
             })
             .catch((err) => {
                 console.log("password ou email erroné");
             })
     }
-    changeIsLogged = () => {
-      this.props.userLogin()
+    changeIsLogged = (data) => {
+      this.props.userLogin(data).bind(this)
     }
 
     render() {
@@ -75,8 +83,7 @@ class SignIn extends Component {
     Sign In
   </Button>
 </Form>
-<button onClick={this.changeIsLogged}>Display True</button>
-{this.props.isLogged && <h2>True</h2>}
+{this.props.isLogged.isUserLogged && <h2>You are logged</h2>}
 
 
             </div>
@@ -84,16 +91,16 @@ class SignIn extends Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state) { //Accéder aux données de notre store dans les props
   return {
-      isLogged: state.isLogged.isUserLogged
+      isLogged: state.isLogged
   };
 }
 
-const mapDispatchToProps = {
-  userLogin
+const mapDispatchToProps = { //Permettre de modifier les données par l'appel des actions en les appelant par les props
+  userLogin                 // A l'appel, de this.props.userLogin -> isUserLogged  = true
 }
 
-export default connect(
+export default connect( 
   mapStateToProps, mapDispatchToProps
 )(SignIn);
