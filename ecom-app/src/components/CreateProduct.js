@@ -33,21 +33,27 @@ class CreateProduct extends Component {
             prix: this.state.prix,
             stock: this.state.stock,
             image: this.state.image,
+            user_affiliate_id: this.props.userId
         
         }
 
 
         axios.post(`http://localhost:8080/products`, product,
         { headers:
-            {'Authorization': this.props.token}
+            {
+              "Content-Type": "application/json",
+              authorization: this.props.token
+            }
         }
         )
         .then(res => {
-            console.log(res);
+            // console.log(res);
             console.log(res.data);
 
-        })
-        console.log(this.state)
+        }).catch((err) => {
+          console.log(err);
+      })
+        // console.log(this.state)
     }
 
 
@@ -96,7 +102,8 @@ class CreateProduct extends Component {
 
 function mapStateToProps(state) { //Accéder aux données de notre store dans les props
     return {
-        token: state.isLogged.token
+        token: state.isLogged.token,
+        userId: state.isLogged.id
     };
   }
   

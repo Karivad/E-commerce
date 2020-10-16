@@ -17,13 +17,13 @@ app.use((req, res, next) => {
 })
 
 app.use('/products', (req, res, next) => {
-    const ourToken = req.headers.authorization         //Token recupéré par le header (on met le token dans le header lors du axios)
+    const ourToken = req.headers['authorization']         //Token recupéré par le header (on met le token dans le header lors du axios)
     jwt.verify(ourToken, config.secret, (err, decoded) => {
         if (err) {                                      // err => Le token n'est pas valide
             res.status(404).send('Accès impossible')
         }
         else {
-            res.status(500).send('Accès autorisé')
+            // res.status(200).send('Accès autorisé')
             next()                                      //Permet de passer au GET ou au POST 
         }
     })

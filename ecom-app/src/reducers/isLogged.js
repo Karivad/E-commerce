@@ -19,9 +19,8 @@ const isLogged = (state = initialState, action) => {
             
         }
         default:
-            return {
-                ...state
-            }
+            return state
+    
     }
 }
 
