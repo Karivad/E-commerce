@@ -45,7 +45,6 @@ class SignUp extends Component {
                     console.log(res.data);
                 })
 
-
             console.log(this.state)
         } else {
             console.log("Wrong password");
@@ -54,7 +53,6 @@ class SignUp extends Component {
         }
        
     }
-
 
     render() {
         return (

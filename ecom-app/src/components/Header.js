@@ -2,6 +2,9 @@ import React from "react"; // add import in every components !
 import Nav from "react-bootstrap/Nav";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
+import ProductList from "./ProductList";
+import CreateProduct from "./CreateProduct";
+
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import Col from 'react-bootstrap/Col'
@@ -65,7 +68,14 @@ class Header extends React.Component {
             <Route exact path="/sign-up">
               <SignUp />
             </Route>
+            <Route  path="/products">
+              < ProductList />
+            </Route>
+            <Route path="/create-product">
+              <CreateProduct />
+            </Route>
           </Switch>
+
         </Router>
       </div>
 
