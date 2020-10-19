@@ -6,6 +6,7 @@ import ProductList from "./ProductList";
 import CreateProduct from "./CreateProduct";
 import { connect } from 'react-redux';
 import {userSignOut} from '../actions/userLogin'   // sign in et sign out dans le "userLogin.js"
+import {removeProducts} from '../actions/productsActions'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import Col from 'react-bootstrap/Col'
@@ -20,6 +21,7 @@ class Header extends React.Component {
 
   resetStore = () => {
     this.props.userSignOut()
+    this.props.removeProducts()
   }
 
   render() {
@@ -98,7 +100,8 @@ function mapStateToProps(state) { //Accéder aux données de notre store dans le
 }
 
 const mapDispatchToProps = { //Permettre de modifier les données par l'appel des actions en les appelant par les props
-  userSignOut                // A l'appel, de this.props.userLogin -> isUserLogged  = true
+  userSignOut,
+  removeProducts                // A l'appel, de this.props.userLogin -> isUserLogged  = true
 }
 
 export default connect( 

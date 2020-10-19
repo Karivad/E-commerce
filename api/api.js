@@ -121,7 +121,7 @@ app.post("/products", (req,res) => {
 app.get("/products", (req, res) => {
         conn.query("SELECT * FROM products", (err, result) => {
             if (err) throw err
-            res.status(500).send(result)
+            res.status(200).send(result)
         })
     })
 
