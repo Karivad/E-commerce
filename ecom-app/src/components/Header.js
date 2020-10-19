@@ -4,11 +4,11 @@ import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import ProductList from "./ProductList";
 import CreateProduct from "./CreateProduct";
-
+import { connect } from 'react-redux';
+import {userSignOut} from '../actions/userLogin'   // sign in et sign out dans le "userLogin.js"
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import Col from 'react-bootstrap/Col'
-
 
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
@@ -17,6 +17,11 @@ class Header extends React.Component {
     super();
     this.state = {};
   }
+
+  resetStore = () => {
+    this.props.userSignOut()
+  }
+
   render() {
     return (
       <div>
@@ -55,7 +60,10 @@ class Header extends React.Component {
           </Nav.Item>
 
               <Nav.Item>
-                <Button variant="outline-danger">Sign out</Button>{' '}
+              <Nav.Link href="/sign-in">
+                <Button 
+                variant="outline-danger" onClick={this.resetStore}>Sign out</Button>{' '}
+                </Nav.Link>
               </Nav.Item>
             
           </Nav>
@@ -83,4 +91,16 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+function mapStateToProps(state) { //Accéder aux données de notre store dans les props
+  return {
+      isLogged: state.isLogged
+  };
+}
+
+const mapDispatchToProps = { //Permettre de modifier les données par l'appel des actions en les appelant par les props
+  userSignOut                // A l'appel, de this.props.userLogin -> isUserLogged  = true
+}
+
+export default connect( 
+  mapStateToProps, mapDispatchToProps
+)(Header);

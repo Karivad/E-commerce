@@ -16,8 +16,12 @@ const isLogged = (state = initialState, action) => {
             id: action.id,          //On récupère ça dans le jwt.decode
             image: action.image,//On récupère ça dans le jwt.decode
             token: action.token,
-            
+
         }
+
+        case "USER_SIGNOUT":
+            return initialState
+
         default:
             return state
     

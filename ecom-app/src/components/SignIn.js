@@ -52,7 +52,7 @@ class SignIn extends Component {
             })
     }
     changeIsLogged = (data) => {
-      this.props.userLogin(data).bind(this)
+      this.props.userLogin(data)
     }
 
     render() {
@@ -84,7 +84,6 @@ class SignIn extends Component {
   </Button>
 </Form>
 {this.props.isLogged.isUserLogged && <h2>You are logged</h2>}
-
 
             </div>
         );

@@ -1,3 +1,4 @@
+
 export const userLogin = (data) => {
     return {
         type: 'USER_LOGIN',
@@ -6,4 +7,8 @@ export const userLogin = (data) => {
         image: data.image,
         token: data.token,
     }
+
+}
+export const userSignOut = () => {
+    return {type: 'USER_SIGNOUT'}
 }
