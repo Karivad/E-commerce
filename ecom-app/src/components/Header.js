@@ -40,6 +40,8 @@ class Header extends React.Component {
                 <Nav.Link href="/sign-up">Sign-up</Nav.Link>
               </Nav.Item>
 
+            
+
               <Nav.Item>
                 <Nav.Link href="/sign-in">Sign-in</Nav.Link>
               </Nav.Item>

@@ -14,16 +14,17 @@ class ProductPage extends Component {
     }
 
     render() {
-        
+
         const id = this.props.match.params.id;
     
         return (
             <div>
-            <h1>Titre {this.props.products[this.props.match.params.id].titre || "lol"}</h1>
-            <img src="/"/>
-            <p>Description du produit</p>
-            <p>Prix</p>
-            <p>Stock</p>
+
+            <h1>{this.props.products[this.props.match.params.id - 1].titre}</h1>
+            <img src={this.props.products[this.props.match.params.id - 1].image}/>
+            <p>{this.props.products[this.props.match.params.id - 1].description}</p>
+            <p>{this.props.products[this.props.match.params.id - 1].prix}</p>
+            <p>{this.props.products[this.props.match.params.id - 1].stock}</p>
 
             </div>
         );
