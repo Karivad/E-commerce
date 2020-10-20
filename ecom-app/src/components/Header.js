@@ -27,7 +27,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div>
+      
         <Router>
           <Nav className="bg-dark pt-3 pb-3" activeKey="/home" >
 
@@ -36,22 +36,29 @@ class Header extends React.Component {
                 E-commerce
               </Nav.Link>
             </Nav.Item>
-              <Nav.Item>
+
+            {!this.props.isLogged.token.length &&
+
+              <p>
+                <Nav.Item>
                 <Nav.Link href="/sign-up">Sign-up</Nav.Link>
               </Nav.Item>
 
-            
-
               <Nav.Item>
-                <Nav.Link href="/sign-in">Sign-in</Nav.Link>
+                <Nav.Link href="/">Sign-in</Nav.Link>
               </Nav.Item>
+              </p>
+            
+            }
 
+            {this.props.isLogged.token.length &&
+            <p>
               <Nav.Item>
                 <Nav.Link href="/products">Products</Nav.Link>
               </Nav.Item>
 
               <Nav.Item>
-                <Nav.Link href="/create-product">Create product</Nav.Link>
+                <Nav.Link href="/">Create product</Nav.Link>
               </Nav.Item>
 
               <Nav.Item>
@@ -70,30 +77,39 @@ class Header extends React.Component {
                 variant="outline-danger" onClick={this.resetStore}>Sign out</Button>{' '}
                 </Nav.Link>
               </Nav.Item>
-            
+              </p>
+        }
           </Nav>
 
                                              {/* import */}
+        {!this.props.isLogged.token.length &&                                  
           <Switch>
-            <Route path="/sign-in">
+            <Route path="/">
               <SignIn />
             </Route>
             <Route exact path="/sign-up">
               <SignUp />
-            </Route>
+              </Route>
+          </Switch>
+        }
+        {this.props.isLogged.token.length &&
+
+          <Switch>
             <Route  path="/products">
               < ProductList />
             </Route>
-            <Route path="/create-product">
+
+            
+            <Route exact path="/">
               <CreateProduct />
             </Route>
             <Route path={`/product/:id`} >
               <ProductPage />
               </Route>
           </Switch>
-
+          }
         </Router>
-      </div>
+      
 
     );
   }

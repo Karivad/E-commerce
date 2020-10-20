@@ -9,19 +9,18 @@ class ProductPage extends Component {
     constructor() {
         super()
         this.state = {
-            id: null
+           
         }
     }
 
     render() {
 
-        const id = this.props.match.params.id;
     
         return (
             <div>
 
             <h1>{this.props.products[this.props.match.params.id - 1].titre}</h1>
-            <img src={this.props.products[this.props.match.params.id - 1].image}/>
+            <img alt={`product-${this.props.products[this.props.match.params.id - 1].titre}`} src={this.props.products[this.props.match.params.id - 1].image}/>
             <p>{this.props.products[this.props.match.params.id - 1].description}</p>
             <p>{this.props.products[this.props.match.params.id - 1].prix}</p>
             <p>{this.props.products[this.props.match.params.id - 1].stock}</p>
