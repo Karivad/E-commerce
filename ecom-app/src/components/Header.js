@@ -3,6 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import ProductList from "./ProductList";
+import ProductPage from "./ProductPage";
 import CreateProduct from "./CreateProduct";
 import { connect } from 'react-redux';
 import {userSignOut} from '../actions/userLogin'   // sign in et sign out dans le "userLogin.js"
@@ -84,6 +85,9 @@ class Header extends React.Component {
             <Route path="/create-product">
               <CreateProduct />
             </Route>
+            <Route path={`/product/:id`} >
+              <ProductPage />
+              </Route>
           </Switch>
 
         </Router>
