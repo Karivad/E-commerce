@@ -3,15 +3,23 @@ import Card from 'react-bootstrap/Card'
 import axios from 'axios';
 import { connect } from 'react-redux';
 import {getProducts} from '../actions/productsActions'
+import ProductPage from './ProductPage';
 
+import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
 class ProductList extends Component {
     constructor() {
         super();
         this.state = {
-         
+            id: null
         };
       }
+
+    setId = (identif) => {
+        this.setState({
+            id: identif 
+        })
+    }
 
     getProducts = async () => {
         const products = await axios.get('http://localhost:8080/products', 
@@ -31,10 +39,10 @@ class ProductList extends Component {
         return (
             <div>
                 <h1>ProductList</h1> 
-            
+                <Router>
                 {this.props.products.map((card) => (
+                    <Link onClick={this.setId(card.id)} to={`/product/${this.state.id}`}>
                 <Card style={{ width: '18rem' }} key={card.id} >
-                    
                     <Card.Img variant="top" src={card.image} />
                     <Card.Body>
                         <Card.Title>{card.titre}</Card.Title>
@@ -43,10 +51,16 @@ class ProductList extends Component {
                         </Card.Text>
                     </Card.Body>
                 </Card>
+                </Link>
                 )
             )}
+            <Switch>
+            <Route path={`/products/${this.state.id}`} >
+              <ProductPage />
+              </Route>
+          </Switch>
+          </Router>
             </div>
-        
         );
     }
 }
