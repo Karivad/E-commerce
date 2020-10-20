@@ -27,7 +27,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      
+      <div>
         <Router>
           <Nav className="bg-dark pt-3 pb-3" activeKey="/home" >
 
@@ -109,7 +109,7 @@ class Header extends React.Component {
           </Switch>
           }
         </Router>
-      
+      </div>
 
     );
   }
