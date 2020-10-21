@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { userLogin } from '../actions/userLogin'
-import { Link } from "react-router-dom";
+
 
 const jwt = require('jsonwebtoken')
 
@@ -32,6 +32,7 @@ class SignIn extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    
     const user = {
       email: this.state.email,
       password: this.state.password,
@@ -45,6 +46,7 @@ class SignIn extends Component {
           decoded.token = token
           console.log(decoded)
           this.changeIsLogged(decoded)
+          
         }
         catch (err) {
           console.log(err)
@@ -84,9 +86,7 @@ class SignIn extends Component {
           </Form.Group>
  
           <Button variant="warning" type="submit">
-          <Link to={"/products"}>
             Sign In
-            </Link>
   </Button>
   
         </Form>
@@ -99,7 +99,8 @@ class SignIn extends Component {
 
 function mapStateToProps(state) { //Accéder aux données de notre store dans les props
   return {
-    isLogged: state.isLogged
+    isLogged: state.isLogged,
+    products: state.products.products
   };
 }
 

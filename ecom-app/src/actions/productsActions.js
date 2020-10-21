@@ -1,7 +1,8 @@
 export const getProducts = (data) => {
+    
     return {
         type: 'GET_PRODUCTS',
-        products: data.data
+        products: data.data 
     }
 }
 

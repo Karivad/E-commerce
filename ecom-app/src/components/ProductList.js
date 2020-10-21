@@ -16,7 +16,7 @@ class ProductList extends Component {
 
    
 
-    getProducts = async () => {
+    getProductsFromDb = async () => {
         const products = await axios.get('http://localhost:8080/products', 
         { headers:
             {
@@ -25,14 +25,16 @@ class ProductList extends Component {
             }
         })
 
-        this.props.getProducts(products)
+        await this.props.getProducts(products)
        
     }
   
     render() {
-        this.getProducts()
+        this.getProductsFromDb()
+        
         return (
             <div>
+                
                 <h1>ProductList</h1> 
                 {this.props.products.map((card) => (
                     <Link to={`/product/${card.id}`} key={card.id}>
@@ -55,9 +57,10 @@ class ProductList extends Component {
 }
 
 function mapStateToProps(state) { //Accéder aux données de notre store dans les props
+   console.log("state: ", state.products.products)
     return {
         token: state.isLogged.token,
-        products: state.products
+        products: state.products.products
 
     };
   }

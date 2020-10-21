@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import Col from 'react-bootstrap/Col'
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
 class Header extends React.Component {
   constructor() {
@@ -23,9 +23,13 @@ class Header extends React.Component {
   resetStore = () => {
     this.props.userSignOut()
     this.props.removeProducts()
+    // this.props.history.push("/")
+    localStorage.removeItem("persist:root"); // Thomas m'a dit pour vider le store 
+
   }
 
   render() {
+
     return (
       <div>
         <Router>
@@ -51,7 +55,7 @@ class Header extends React.Component {
             {this.props.isLogged.token.length &&
               <div>
                 <Nav.Item>
-                  <Nav.Link as={Link} to={"/products"}>Products</Nav.Link>
+                  <Nav.Link as={Link} to={"/"}>Products</Nav.Link>
                 </Nav.Item>
 
                 <Nav.Item>
@@ -71,7 +75,9 @@ class Header extends React.Component {
                 <Nav.Item>
                   <Nav.Link as={Link} to={"/"}>
                     <Button
-                      variant="outline-danger" onClick={this.resetStore}>Sign out</Button>{' '}
+                      variant="outline-danger" onClick={this.resetStore}>Sign out
+                      </Button>{' '}
+                      
                   </Nav.Link>
                 </Nav.Item>
                 </div>
@@ -80,14 +86,17 @@ class Header extends React.Component {
 
             <Switch>
               <Route exact path="/">
-                <SignIn />
+                {this.props.isLogged.token.length > 0 ? 
+                < ProductList /> : <SignIn />
+                }
+                
               </Route>
               <Route exact path="/sign-up">
                 <SignUp />
               </Route>              
-              <Route path="/products">
+              {/* <Route path="/products">
                 < ProductList />
-              </Route>
+              </Route> */}
               <Route exact path="/create-product">
                 <CreateProduct />
               </Route>
@@ -106,12 +115,13 @@ class Header extends React.Component {
 function mapStateToProps(state) { //Accéder aux données de notre store dans les props
   return {
     isLogged: state.isLogged
+    
   };
 }
 
 const mapDispatchToProps = { //Permettre de modifier les données par l'appel des actions en les appelant par les props
   userSignOut,
-  removeProducts                // A l'appel, de this.props.userLogin -> isUserLogged  = true
+  removeProducts             // A l'appel, de this.props.userLogin -> isUserLogged  = true
 }
 
 export default connect(

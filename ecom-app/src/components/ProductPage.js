@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import {getProducts} from '../actions/productsActions'
+// import {getProducts} from '../actions/productsActions'
 
 
 
@@ -14,7 +14,7 @@ class ProductPage extends Component {
     }
 
     render() {
-
+        
     
         return (
             <div>
@@ -33,13 +33,13 @@ class ProductPage extends Component {
 function mapStateToProps(state) { //Accéder aux données de notre store dans les props
     return {
         token: state.isLogged.token,
-        products: state.products
+        products: state.products.products
 
     };
   }
   
   const mapDispatchToProps = { //Permettre de modifier les données par l'appel des actions en les appelant par les props
-  getProducts                 // A l'appel, de this.props.userLogin -> isUserLogged  = true
+//   getProducts                 // A l'appel, de this.props.userLogin -> isUserLogged  = true
 }
 
 
