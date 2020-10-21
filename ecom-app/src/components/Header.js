@@ -66,7 +66,7 @@ class Header extends React.Component {
 
 
                   <Col xs={2} md={1}>
-                    < Image src={require('../image/pistol.jpeg')} alt="mamie" height={45} width={45} roundedCircle />
+                    < Image src={this.props.isLogged.image} alt={`profile-${this.props.isLogged.id}`} height={45} width={45} roundedCircle />
                   </Col>
 
 

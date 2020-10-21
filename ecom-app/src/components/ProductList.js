@@ -30,7 +30,6 @@ class ProductList extends Component {
     }
   
     render ()  {
-        // this.getProductsFromDb();
         
         return (
             <div>
@@ -62,7 +61,7 @@ class ProductList extends Component {
   getProducts                 // A l'appel, de this.props.userLogin -> isUserLogged  = true
 }
 
-function mapStateToProps(state) { //Accéder aux données de notre store dans les props
+function mapStateToProps(state) { //Prmet d'ajouter des données de notre store a nos prpps
     console.log("state: ", state.products.products)
      return {
          token: state.isLogged.token,
@@ -71,6 +70,4 @@ function mapStateToProps(state) { //Accéder aux données de notre store dans le
      };
    }
 
-  export default connect( 
-    mapStateToProps, mapDispatchToProps
-  )(ProductList);
+  export default connect(mapStateToProps, mapDispatchToProps)(ProductList);
