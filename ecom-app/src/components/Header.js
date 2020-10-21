@@ -5,12 +5,15 @@ import SignIn from "./SignIn";
 import ProductList from "./ProductList";
 import ProductPage from "./ProductPage";
 import CreateProduct from "./CreateProduct";
+import EditProfile from "./EditProfile";
+
 import { connect } from 'react-redux';
 import { userSignOut } from '../actions/userLogin'   // sign in et sign out dans le "userLogin.js"
 import { removeProducts } from '../actions/productsActions'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import Col from 'react-bootstrap/Col'
+
 
 import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
@@ -64,10 +67,11 @@ class Header extends React.Component {
 
                 <Nav.Item>
 
-
+                <Nav.Link as={Link} to={"/edit-profile"}>
                   <Col xs={2} md={1}>
                     < Image src={this.props.isLogged.image} alt={`profile-${this.props.isLogged.id}`} height={45} width={45} roundedCircle />
                   </Col>
+                  </Nav.Link>
 
 
                 </Nav.Item>
@@ -88,21 +92,24 @@ class Header extends React.Component {
               <Route exact path="/">
                 {this.props.isLogged.token.length > 0 ? 
                 < ProductList /> : <SignIn />
-                }
-                
+                }  
               </Route>
-              <Route exact path="/sign-up">
+              <Route path="/sign-up">
                 <SignUp />
               </Route>              
               {/* <Route path="/products">
                 < ProductList />
               </Route> */}
-              <Route exact path="/create-product">
+              <Route path="/create-product">
                 <CreateProduct />
               </Route>
               <Route path={`/product/:id`} >
                 <ProductPage />
               </Route>
+              <Route path="/edit-profile">
+                <EditProfile />
+              </Route>
+
             </Switch>
 
         </Router>
