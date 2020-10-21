@@ -99,8 +99,8 @@ class SignIn extends Component {
 
 function mapStateToProps(state) { //Accéder aux données de notre store dans les props
   return {
-    isLogged: state.isLogged,
-    products: state.products.products
+    isLogged: state.isLogged
+    // products: state.products.products
   };
 }
 

@@ -11,11 +11,12 @@ const products = (state = initialState, action) => {
           }
           
         case 'REMOVE_PRODUCTS':
-            console.log("STATE:  ", state);
-            let newState = [...state.products];
-            newState.splice(0, newState.length);
-            console.log("NEW STATE:  ", newState);
-            return newState;
+            // console.log("STATE:  ", state);
+            // let newState = [...state.products];
+            // newState.splice(0, newState.length);
+            // console.log("NEW STATE:  ", newState);
+            // return newState;
+            return initialState
             
             
         default:

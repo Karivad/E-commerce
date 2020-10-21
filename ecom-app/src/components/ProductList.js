@@ -16,7 +16,7 @@ class ProductList extends Component {
 
    
 
-    getProductsFromDb = async () => {
+    UNSAFE_componentWillMount = async () => {
         const products = await axios.get('http://localhost:8080/products', 
         { headers:
             {
@@ -25,12 +25,12 @@ class ProductList extends Component {
             }
         })
 
-        await this.props.getProducts(products)
+        this.props.getProducts(products)
        
     }
   
-    render() {
-        this.getProductsFromDb()
+    render ()  {
+        // this.getProductsFromDb();
         
         return (
             <div>
@@ -56,19 +56,20 @@ class ProductList extends Component {
     }
 }
 
-function mapStateToProps(state) { //Accéder aux données de notre store dans les props
-   console.log("state: ", state.products.products)
-    return {
-        token: state.isLogged.token,
-        products: state.products.products
 
-    };
-  }
   
   const mapDispatchToProps = { //Permettre de modifier les données par l'appel des actions en les appelant par les props
   getProducts                 // A l'appel, de this.props.userLogin -> isUserLogged  = true
 }
 
+function mapStateToProps(state) { //Accéder aux données de notre store dans les props
+    console.log("state: ", state.products.products)
+     return {
+         token: state.isLogged.token,
+         products: state.products.products
+ 
+     };
+   }
 
   export default connect( 
     mapStateToProps, mapDispatchToProps
