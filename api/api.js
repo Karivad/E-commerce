@@ -159,6 +159,7 @@ app.get("/products/:id", (req, res) => {
         myProduct.seller.push(user.name)                
         })
         res.send(myProduct)
+        console.log()
         
         })
 
