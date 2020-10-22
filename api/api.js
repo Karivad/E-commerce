@@ -165,8 +165,32 @@ app.get("/products/:id", (req, res) => {
     })
 
 })
-    
 
+    app.put("/edit-profile", (req, res) => {
+        const id = req.body.id
+        const name = req.body.name
+        const last = req.body.last
+        const email = req.body.email
+        const password = req.body.password
+        const image = req.body.image
+        console.log(req.body);
+
+        bcrypt.hash(password, saltRounds, (err, hash) => {
+            if (err) throw err
+            let updateUser = "UPDATE users SET email = `${email}`, password = `${hash}`, name = `${name}`, last = `${last}`, image = `${image}` WHERE id = ${id}"
+            console.log(updateUser)
+        
+            conn.query(updateUser, (err, result) => {
+            console.log(result)
+            if (err) throw err
+            
+            res.send(`${name} a bien été modifié à la DB`)
+        
+            });
+            
+          });
+
+    })
 
 
 

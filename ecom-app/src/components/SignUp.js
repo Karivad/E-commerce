@@ -22,10 +22,7 @@ class SignUp extends Component {
 
     handleChange = event => {
         const targetName = event.target.name
-
         this.setState({[targetName]: event.target.value})  
-
-        
     }
 
     handleSubmit = event => {
