@@ -120,11 +120,11 @@ handleSubmit = event => {
   </thead>
   <tbody>
   {this.props.products.filter(element => element.user_affiliate_id === this.props.id).map((tab) => (
-    <tr>
+    <tr key={tab.id}>
       <td>{tab.titre}</td>
       <td>{tab.description}</td>
       {/* <td>{tab.categorie}</td> */}
-      <td>{tab.image}</td>
+      <td><img alt={tab.id} src={tab.image}/></td>
       <td>{tab.prix}</td>
       <td>
       <Button variant="info" type="submit">
