@@ -7,6 +7,7 @@ export const getProducts = (data) => {
 }
 
 export const pushProducts = (data) => {
+    console.log(data)
     return {
         type: 'PUSH_PRODUCTS',
         product: data

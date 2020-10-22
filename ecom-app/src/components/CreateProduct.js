@@ -51,9 +51,9 @@ class CreateProduct extends Component {
             // console.log(res);
             console.log(res.data);
 
-        this.props.pushProducts({
-          product,
-        })
+        this.props.pushProducts(
+          product
+        )
 
 
         }).catch((err) => {
