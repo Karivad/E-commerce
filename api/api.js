@@ -159,7 +159,7 @@ app.get("/products/:id", (req, res) => {
         myProduct.seller.push(user.name)                
         })
         res.send(myProduct)
-        console.log()
+     
         
         })
 
@@ -178,7 +178,7 @@ app.get("/products/:id", (req, res) => {
 
         bcrypt.hash(password, saltRounds, (err, hash) => {
             if (err) throw err
-            let updateUser = "UPDATE users SET email = `${email}`, password = `${hash}`, name = `${name}`, last = `${last}`, image = `${image}` WHERE id = ${id}"
+            let updateUser = `UPDATE users SET email = "${email}", password = "${hash}", name = "${name}", last = "${last}", image = "${image}" WHERE id = ${id}`
             console.log(updateUser)
         
             conn.query(updateUser, (err, result) => {
