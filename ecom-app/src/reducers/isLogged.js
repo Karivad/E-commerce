@@ -20,7 +20,14 @@ const isLogged = (state = initialState, action) => {
         }
 
         case "USER_SIGNOUT":
-            return initialState
+            return initialState;
+
+        case "UPDATE_USER":
+            return {
+                ...state,
+                email: action.email,
+                image: action.image//On récupère ça dans le jwt.decode
+            }
 
         default:
             return state

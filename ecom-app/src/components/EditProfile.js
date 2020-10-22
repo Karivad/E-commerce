@@ -4,9 +4,59 @@ import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table'
 import { connect } from 'react-redux';
 import {getProducts} from '../actions/productsActions'
+import { updateUser } from '../actions/userLogin'
+import axios from 'axios';
 
 class EditProfile extends Component {
-    render() {
+  constructor() {
+    super();
+    this.state = {
+      name: '',
+      last: '',
+      email: '',
+      password: '',
+      confirm: '',
+      image: '',
+    };
+  }
+
+  handleChange = event => {
+    const targetName = event.target.name
+    this.setState({[targetName]: event.target.value})  
+}
+
+handleSubmit = event => {
+  event.preventDefault();
+  if(this.state.password === this.state.confirm) {
+      const user = {                                      // objet user envoyé à Axios
+          name: this.state.name,
+          last: this.state.last,
+          email: this.state.email,
+          password: this.state.password,
+          image: this.state.image,
+          id: this.props.id
+
+      }  
+      axios.put(`http://localhost:8080/edit-profile`, user)
+          .then(res => {
+              console.log(res);
+              console.log(res.data);
+              this.props.updateUser({
+                image:  user.image,
+                email: user.email
+              })
+          })
+
+      console.log(this.state)
+  } else {
+      console.log("Wrong password");
+      this.setState({msg: "wrong password"})  
+
+  }
+ 
+}
+
+  render() {
         return (
             <div>
 
@@ -46,7 +96,7 @@ class EditProfile extends Component {
 
 <Form.Group controlId="formBasicPicture">
     <Form.Label>Profile picture URL</Form.Label>
-    <Form.Control type="text" placeholder="Profile picture URL" name="nam" onChange={this.handleChange} />
+    <Form.Control type="text" placeholder="Profile picture URL" name="image" onChange={this.handleChange} />
   </Form.Group>
 
   <Button variant="warning" type="submit">
@@ -93,13 +143,15 @@ class EditProfile extends Component {
     }
 }
 const mapDispatchToProps = { 
-getProducts                
+getProducts,
+updateUser                
 }
 
 function mapStateToProps(state) { 
   console.log("state: ", state.products.products)
    return {
        token: state.isLogged.token,
+       id: state.isLogged.id,
        products: state.products.products
 
    };

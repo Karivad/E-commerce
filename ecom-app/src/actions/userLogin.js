@@ -12,3 +12,11 @@ export const userLogin = (data) => {
 export const userSignOut = () => {
     return {type: 'USER_SIGNOUT'}
 }
+
+export const updateUser = (data) => {
+    return {
+        type: 'UPDATE_USER',
+        image: data.image,
+        email: data.email
+    }
+}
