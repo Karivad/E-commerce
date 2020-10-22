@@ -9,6 +9,14 @@ const products = (state = initialState, action) => {
             ...state,
             products: action.products
           }
+
+        case 'PUSH_PRODUCTS':
+            
+            return {
+
+            products: [...state.products, action.product]
+
+            }
           
         case 'REMOVE_PRODUCTS':
             // console.log("STATE:  ", state);

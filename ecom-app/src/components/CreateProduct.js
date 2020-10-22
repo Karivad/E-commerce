@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import {pushProducts} from '../actions/productsActions'
 
 
 class CreateProduct extends Component {
@@ -49,6 +50,11 @@ class CreateProduct extends Component {
         .then(res => {
             // console.log(res);
             console.log(res.data);
+
+        this.props.pushProducts({
+          product,
+        })
+
 
         }).catch((err) => {
           console.log(err);
@@ -100,6 +106,12 @@ class CreateProduct extends Component {
     }
 }
 
+
+const mapDispatchToProps = { 
+    pushProducts
+  }
+  
+
 function mapStateToProps(state) { //Accéder aux données de notre store dans les props
     return {
         token: state.isLogged.token,
@@ -109,6 +121,4 @@ function mapStateToProps(state) { //Accéder aux données de notre store dans le
   
 
 
-  export default connect( 
-    mapStateToProps, 
-  )(CreateProduct);
+  export default connect(mapStateToProps, mapDispatchToProps)(CreateProduct);
