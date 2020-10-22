@@ -41,6 +41,7 @@ handleSubmit = event => {
           .then(res => {
               console.log(res);
               console.log(res.data);
+
               this.props.updateUser({
                 image:  user.image,
                 email: user.email
@@ -118,7 +119,7 @@ handleSubmit = event => {
     </tr>
   </thead>
   <tbody>
-  {this.props.products.map((tab) => (
+  {this.props.products.filter(element => element.user_affiliate_id === this.props.id).map((tab) => (
     <tr>
       <td>{tab.titre}</td>
       <td>{tab.description}</td>
