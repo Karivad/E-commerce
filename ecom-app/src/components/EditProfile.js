@@ -77,6 +77,7 @@ handleSubmit = event => {
 }
 
   render() {
+    console.log('reducer', this.props.products)
         return (
             <div>
 
