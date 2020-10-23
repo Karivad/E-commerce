@@ -5,12 +5,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { userLogin } from '../actions/userLogin'
 
-
 const jwt = require('jsonwebtoken')
-
-
-
-
 
 class SignIn extends Component {
   constructor() {

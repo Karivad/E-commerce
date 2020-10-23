@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table'
 import { connect } from 'react-redux';
-import {getProducts} from '../actions/productsActions'
+import {getProducts, deleteProducts} from '../actions/productsActions'
 import { updateUser } from '../actions/userLogin'
 import axios from 'axios';
 
@@ -18,6 +18,22 @@ class EditProfile extends Component {
       confirm: '',
       image: '',
     };
+  }
+
+  deleteOnClick = (id) => {
+    axios.delete(`http://localhost:8080/products/${id}`,
+    
+    { headers:
+      {
+        "Content-Type": "application/json",
+        authorization: this.props.token
+      }
+    })
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+    })
+    this.props.deleteProducts(id)
   }
 
   handleChange = event => {
@@ -133,7 +149,7 @@ handleSubmit = event => {
       <Button variant="info" type="submit">
     Edit
   </Button>
-  <Button variant="danger" type="submit">
+  <Button variant="danger" type="submit" onClick={() => this.deleteOnClick(tab.id)}>
     Delete
   </Button>
       </td>
@@ -148,7 +164,8 @@ handleSubmit = event => {
 }
 const mapDispatchToProps = { 
 getProducts,
-updateUser                
+updateUser,
+deleteProducts                
 }
 
 function mapStateToProps(state) { 

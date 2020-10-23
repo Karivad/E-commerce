@@ -15,9 +15,17 @@ export const pushProducts = (data) => {
 }
 
 
-export const removeProducts = () => {
+export const removeProducts = () => {   /// lors du sign out : supprime tous les produits
     return {
         type: 'REMOVE_PRODUCTS',
         
+    }
+}
+
+
+export const deleteProducts = (id) => {   //// supprime UN produit de la liste
+    return {
+        type: 'DELETE_PRODUCT',
+        id: id
     }
 }
