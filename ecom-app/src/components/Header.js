@@ -6,6 +6,7 @@ import ProductList from "./ProductList";
 import ProductPage from "./ProductPage";
 import CreateProduct from "./CreateProduct";
 import EditProfile from "./EditProfile";
+import EditProduct from "./EditProduct";
 
 import { connect } from 'react-redux';
 import { userSignOut } from '../actions/userLogin'   // sign in et sign out dans le "userLogin.js"
@@ -108,6 +109,9 @@ class Header extends React.Component {
               </Route>
               <Route path="/edit-profile">
                 <EditProfile />
+              </Route>
+              <Route path="/edit-product">
+                <EditProduct />
               </Route>
 
             </Switch>

@@ -147,7 +147,7 @@ handleSubmit = event => {
       <td><img alt={tab.id} src={tab.image}/></td>
       <td>{tab.prix}</td>
       <td>
-      <Button variant="info" type="submit">
+      <Button variant="info" type="submit" onClick={() => this.editOnClick(tab.id)}>
     Edit
   </Button>
   <Button variant="danger" type="submit" onClick={() => this.deleteOnClick(tab.id)}>
