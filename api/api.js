@@ -160,7 +160,6 @@ app.get("/products/:id", (req, res) => {
         })
         res.send(myProduct)
      
-        
         })
 
     })
@@ -191,6 +190,18 @@ app.get("/products/:id", (req, res) => {
             
           });
 
+    })
+
+        app.delete("/products/:id", (req, res) => {
+            const id = req.params.id
+
+        conn.query(`DELETE FROM products WHERE id = ${id}`, function (err, result) {
+        console.log(result);
+        if (err) throw err
+        res.send("le produit a bien été supprimé")
+
+        })
+    
     })
 
 

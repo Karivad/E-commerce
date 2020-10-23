@@ -46,6 +46,9 @@ handleSubmit = event => {
                 image:  user.image,
                 email: user.email
               })
+
+              
+
           })
 
       console.log(this.state)
