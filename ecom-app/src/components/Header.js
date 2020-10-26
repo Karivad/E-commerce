@@ -110,7 +110,7 @@ class Header extends React.Component {
               <Route path="/edit-profile">
                 <EditProfile />
               </Route>
-              <Route path="/edit-product">
+              <Route path="/edit-product/:id">
                 <EditProduct />
               </Route>
 

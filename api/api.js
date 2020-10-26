@@ -204,7 +204,27 @@ app.get("/products/:id", (req, res) => {
     
     })
 
+        app.put("/products/:id", (req, res) => {
+            const id = req.params.id
 
+            const titre = req.body.titre
+            const description = req.body.description
+            const prix = parseFloat(req.body.prix)
+            const image = req.body.image
+            const stock = parseInt(req.body.stock)
+
+            let editProduct = `UPDATE products SET titre = "${titre}", description = "${description}", prix = "${prix}", stock = "${stock}", image = "${image}" WHERE id = ${id}`
+            console.log(editProduct)
+
+            conn.query(editProduct, (err, result) => {
+                console.log(result)
+                if (err) throw err
+                
+                res.send(`${titre} a bien été modifié à la DB`)
+
+        })
+
+    })
 
 app.listen(port, () => {
     console.log('enfin')

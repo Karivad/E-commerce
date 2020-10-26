@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import {getProducts, deleteProducts} from '../actions/productsActions'
 import { updateUser } from '../actions/userLogin'
 import axios from 'axios';
+import { withRouter} from 'react-router-dom';
 
 class EditProfile extends Component {
   constructor() {
@@ -18,6 +19,11 @@ class EditProfile extends Component {
       confirm: '',
       image: '',
     };
+  }
+
+
+  editOnClick = (id) => {
+    this.props.history.push(`/edit-product/${id}`)
   }
 
   deleteOnClick = (id) => {
@@ -179,4 +185,4 @@ function mapStateToProps(state) {
    };
  }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(EditProfile));
