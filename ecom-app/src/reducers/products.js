@@ -33,11 +33,22 @@ const products = (state = initialState, action) => {
             return {
                 ...state,
                 products: newState
-            }
+            }   
+
             
+        case 'EDIT_PRODUCT':
+            let newProduct = state.products.filter(product => product.id !== action.id);   
+            newProduct.push(action.product)
+            console.log("NEW STATE:  ", newProduct);
+            return {
+                ...state,
+                products: newProduct
+            }
             
         default:
             return state
+
+
     
     }
 }

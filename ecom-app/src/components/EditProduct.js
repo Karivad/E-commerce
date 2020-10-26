@@ -1,10 +1,64 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
+import { editProducts } from '../actions/productsActions'
+import axios from 'axios';
 
 
 class EditProduct extends Component {
+    constructor() {
+        super()
+        this.state = {
+            titre: "",
+            description: "",
+            image: "",
+            stock: "",
+            prix: "",
+        }
+    }
+
+    handleChange = event => {
+        const targetName = event.target.name
+
+        this.setState({[targetName]: event.target.value})  
+        
+    }
+
+    handleSubmit = event => {
+        event.preventDefault();
+        const product = {
+            titre: this.state.titre,
+            description: this.state.description,
+            prix: this.state.prix,
+            stock: this.state.stock,
+            image: this.state.image,
+        
+        }
+
+        axios.put(`http://localhost:8080/products/${this.props.match.params.id}`, product,  // recup ID dans url
+        { headers:
+            {
+              "Content-Type": "application/json",
+              authorization: this.props.token
+            }
+        }
+        )
+        .then(res => {
+            // console.log(res);
+            console.log(res.data);
+
+        this.props.editProducts(
+          product, this.props.match.params.id
+        )
+
+
+        }).catch((err) => {
+          console.log(err);
+      })
+        // console.log(this.state)
+    }
+
     render() {
         return (
             <div>
@@ -47,4 +101,18 @@ class EditProduct extends Component {
 }
 }
 
-export default EditProduct;
+const mapDispatchToProps = { 
+      editProducts,          
+    }
+    
+    function mapStateToProps(state) { 
+      console.log("state: ", state.products.products)
+       return {
+           token: state.isLogged.token,
+           id: state.isLogged.id,
+           products: state.products.products
+    
+       };
+     }
+    
+    export default connect(mapStateToProps, mapDispatchToProps)(EditProduct);

@@ -29,3 +29,11 @@ export const deleteProducts = (id) => {   //// supprime UN produit de la liste
         id: id
     }
 }
+
+export const editProducts = (data, id) => {   //// edit UN produit de la liste
+    return {
+        type: 'EDIT_PRODUCT',
+        product: data,
+        id: id
+    }
+}
