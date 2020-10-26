@@ -12,5 +12,6 @@ class EditProduct extends Component {
                 </div>
         )
 }
+}
 
 export default EditProduct;
