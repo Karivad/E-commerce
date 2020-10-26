@@ -14,17 +14,20 @@ class ProductPage extends Component {
     }
 
     render() {
-        
+        console.log('blabla', this.props.products)
+        console.log(typeof this.props.match.params.id)
     
         return (
             <div>
-
-            <h1>{this.props.products[this.props.match.params.id - 1].titre}</h1>
-            <img alt={`product-${this.props.products[this.props.match.params.id - 1].titre}`} src={this.props.products[this.props.match.params.id - 1].image}/>
-            <p>{this.props.products[this.props.match.params.id - 1].description}</p>
-            <p>{this.props.products[this.props.match.params.id - 1].prix}</p>
-            <p>{this.props.products[this.props.match.params.id - 1].stock}</p>
-
+{this.props.products.filter(element => element.id === parseInt(this.props.match.params.id)).map((product) => (
+            <div>
+            <h1>{product.titre}</h1>
+            <img alt={`product-${product.titre}`} src={product.image}/>
+            <p>{product.description}</p>
+            <p>{product.prix}</p>
+            <p>{product.stock}</p>
+            </div>
+        ))}
             </div>
         );
     }
