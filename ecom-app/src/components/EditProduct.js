@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
 import { editProducts } from '../actions/productsActions'
+import { withRouter } from "react-router-dom";
+
 import axios from 'axios';
 
 
@@ -37,6 +39,7 @@ class EditProduct extends Component {
         }
 
         axios.put(`http://localhost:8080/products/${this.props.match.params.id}`, product,  // recup ID dans url
+            
         { headers:
             {
               "Content-Type": "application/json",
@@ -115,4 +118,4 @@ const mapDispatchToProps = {
        };
      }
     
-    export default connect(mapStateToProps, mapDispatchToProps)(EditProduct);
+    export default connect(mapStateToProps, mapDispatchToProps)(withRouter(EditProduct));
