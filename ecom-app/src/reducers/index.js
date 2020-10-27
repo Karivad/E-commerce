@@ -4,6 +4,6 @@ import products from './products'
 
 const allReducers = combineReducers({
     isLogged,
-    products,
+    products
 })
 export default allReducers

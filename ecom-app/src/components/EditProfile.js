@@ -69,7 +69,6 @@ handleSubmit = event => {
                 email: user.email
               })
 
-              
 
           })
 
@@ -83,7 +82,7 @@ handleSubmit = event => {
 }
 
   render() {
-    console.log('reducer', this.props.products)
+    console.log('reducer', this.props)
         return (
             <div>
 

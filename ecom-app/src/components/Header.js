@@ -35,18 +35,18 @@ class Header extends React.Component {
   render() {
 
     return (
-      <div>
-        <Router>
-          <Nav className="bg-dark pt-3 pb-3" activeKey="/home" >
+        <Router >
+         
 
+          <Nav className=" d-flex flex-row justify-content-between bg-dark pt-3 pb-3" activeKey="/home" >
             <Nav.Item>
               <Nav.Link eventKey="disabled" disabled>
                 E-commerce
               </Nav.Link>
             </Nav.Item>
-
+            
             {!this.props.isLogged.token.length && (
-              <div>
+              <div  className="d-flex flex-row">
                 <Nav.Item>
                   <Nav.Link as={Link} to={"/sign-up"}>Sign-up</Nav.Link>
                 </Nav.Item>
@@ -57,7 +57,8 @@ class Header extends React.Component {
               </div>
             )}
             {this.props.isLogged.token.length &&
-              <div>
+             
+              <div  className="d-flex flex-row">
                 <Nav.Item>
                   <Nav.Link as={Link} to={"/"}>Products</Nav.Link>
                 </Nav.Item>
@@ -67,7 +68,6 @@ class Header extends React.Component {
                 </Nav.Item>
 
                 <Nav.Item>
-
                 <Nav.Link as={Link} to={"/edit-profile"}>
                   <Col xs={2} md={1}>
                     < Image src={this.props.isLogged.image} alt={`profile-${this.props.isLogged.id}`} height={45} width={45} roundedCircle />
@@ -86,6 +86,7 @@ class Header extends React.Component {
                   </Nav.Link>
                 </Nav.Item>
                 </div>
+              
             }
           </Nav>
 
@@ -115,9 +116,9 @@ class Header extends React.Component {
               </Route>
 
             </Switch>
-
+            
         </Router>
-      </div>
+      
 
     );
   }

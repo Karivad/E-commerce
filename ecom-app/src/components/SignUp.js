@@ -58,17 +58,17 @@ class SignUp extends Component {
 <Form onSubmit={this.handleSubmit}>
   <Form.Group controlId="formBasicName">
     <Form.Label>Name</Form.Label>
-    <Form.Control type="text" placeholder="Name" name="name" onChange={this.handleChange} />
+    <Form.Control className="w-25" type="text" placeholder="Name" name="name" onChange={this.handleChange} />
   </Form.Group>
 
   <Form.Group controlId="formBasicLast">
     <Form.Label>Last Name</Form.Label>
-    <Form.Control type="text" placeholder="Lastname" name="last" onChange={this.handleChange} />
+    <Form.Control className="w-25" type="text" placeholder="Lastname" name="last" onChange={this.handleChange} />
   </Form.Group>
                     
   <Form.Group controlId="formBasicEmail">
     <Form.Label>Email</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" name="email" onChange={this.handleChange} />
+    <Form.Control className="w-25" type="email" placeholder="Enter email" name="email" onChange={this.handleChange} />
     <Form.Text className="text-muted">
       We'll never share your email with anyone else.
     </Form.Text>
@@ -76,12 +76,12 @@ class SignUp extends Component {
 
   <Form.Group controlId="formBasicPassword">
     <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Password" name="password" onChange={this.handleChange} />
+    <Form.Control className="w-25" type="password" placeholder="Password" name="password" onChange={this.handleChange} />
   </Form.Group>
 
   <Form.Group controlId="formBasicConfirm">
     <Form.Label>Confirm Password</Form.Label>
-    <Form.Control type="password" placeholder="Confirm password" name="confirm" onChange={this.handleChange} />
+    <Form.Control className="w-25" type="password" placeholder="Confirm password" name="confirm" onChange={this.handleChange} />
     <Form.Text className="text-danger" >
       {this.state.msg}
     </Form.Text>
@@ -89,7 +89,7 @@ class SignUp extends Component {
 
 <Form.Group controlId="formBasicPicture">
     <Form.Label>Profile picture URL</Form.Label>
-    <Form.Control type="text" placeholder="Profile picture URL" name="image" onChange={this.handleChange} />
+    <Form.Control className="w-25" type="text" placeholder="Profile picture URL" name="image" onChange={this.handleChange} />
   </Form.Group>
 
   <Button variant="warning" type="submit">

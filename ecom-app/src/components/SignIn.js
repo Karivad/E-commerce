@@ -58,7 +58,7 @@ class SignIn extends Component {
 
   render() {
     return (
-      <div>
+      <div className="border m-5 p-5">
         <h1>Sign In</h1>
 
         <Form onSubmit={this.handleSubmit}>
@@ -69,7 +69,7 @@ class SignIn extends Component {
 
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" name="email" onChange={this.handleChange} />
+            <Form.Control className="w-50"type="email" placeholder="Enter email" name="email" onChange={this.handleChange} />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
     </Form.Text>
@@ -77,7 +77,7 @@ class SignIn extends Component {
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" name="password" onChange={this.handleChange} />
+            <Form.Control className="w-50" type="password" placeholder="Password" name="password" onChange={this.handleChange} />
           </Form.Group>
  
           <Button variant="warning" type="submit">

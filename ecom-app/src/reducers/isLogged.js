@@ -26,7 +26,7 @@ const isLogged = (state = initialState, action) => {
             return {
                 ...state,
                 email: action.email,
-                image: action.image//On récupère ça dans le jwt.decode
+                image: action.image  //On récupère ça dans le jwt.decode
             }
 
         default:

@@ -36,7 +36,7 @@ class ProductList extends Component {
                 
                 <h1>ProductList</h1> 
                 {this.props.products.map((card) => (
-                    <Link to={`/product/${card.id}`} key={card.id}>
+                    <Link to={`/product/${card.id}`} key={card.id} className="card-link">
                 <Card style={{ width: '18rem' }}  >
                     <Card.Img variant="top" src={card.image} />
                     <Card.Body>
