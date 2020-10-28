@@ -57,11 +57,11 @@ class ProductList extends Component {
 
 
   
-  const mapDispatchToProps = { //Permettre de modifier les données par l'appel des actions en les appelant par les props
-  getProducts                 // A l'appel, de this.props.userLogin -> isUserLogged  = true
+  const mapDispatchToProps = {                      //Permettre de modifier les données par l'appel des actions en les appelant par les props
+  getProducts                                       // A l'appel, de this.props.userLogin -> isUserLogged  = true
 }
 
-function mapStateToProps(state) { //Prmet d'ajouter des données de notre store a nos prpps
+function mapStateToProps(state) {                   //Permet d'ajouter des données de notre store a nos prpps
     console.log("state: ", state.products.products)
      return {
          token: state.isLogged.token,

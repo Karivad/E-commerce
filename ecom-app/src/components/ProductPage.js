@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
+import Button from 'react-bootstrap/Button';
+import { addingCartStore } from '../actions/cartActions';
+
 // import {getProducts} from '../actions/productsActions'
 
 
@@ -12,6 +15,12 @@ class ProductPage extends Component {
            
         }
     }
+
+
+    addToCart = (id) => {
+        this.props.addingCartStore(id)
+    }
+
 
     render() {
         console.log('blabla', this.props.products)
@@ -26,6 +35,11 @@ class ProductPage extends Component {
             <p>{product.description}</p>
             <p>{product.prix}</p>
             <p>{product.stock}</p>
+
+            <Button variant="warning" type="submit" onClick={() => this.addToCart(product.id)}>
+                Add to cart
+            </Button>
+
             </div>
         ))}
             </div>
@@ -37,12 +51,14 @@ function mapStateToProps(state) { //Accéder aux données de notre store dans le
     return {
         token: state.isLogged.token,
         products: state.products.products
+        
 
     };
   }
   
   const mapDispatchToProps = { //Permettre de modifier les données par l'appel des actions en les appelant par les props
-//   getProducts                 // A l'appel, de this.props.userLogin -> isUserLogged  = true
+//   getProducts 
+    addingCartStore                // A l'appel, de this.props.userLogin -> isUserLogged  = true
 }
 
 

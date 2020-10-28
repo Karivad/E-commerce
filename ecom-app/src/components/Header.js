@@ -17,6 +17,7 @@ import Col from 'react-bootstrap/Col'
 
 
 import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import AddCart from "./AddCart";
 
 class Header extends React.Component {
   constructor() {
@@ -73,8 +74,10 @@ class Header extends React.Component {
                     < Image src={this.props.isLogged.image} alt={`profile-${this.props.isLogged.id}`} height={45} width={45} roundedCircle />
                   </Col>
                   </Nav.Link>
+                </Nav.Item>
 
-
+                <Nav.Item>
+                  <Nav.Link as={Link} to={"/cart"}>CART [0]</Nav.Link>
                 </Nav.Item>
 
                 <Nav.Item>
@@ -113,6 +116,9 @@ class Header extends React.Component {
               </Route>
               <Route path="/edit-product/:id">
                 <EditProduct />
+              </Route>
+              <Route path="/cart">
+                <AddCart />
               </Route>
 
             </Switch>
