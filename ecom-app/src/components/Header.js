@@ -77,7 +77,7 @@ class Header extends React.Component {
                 </Nav.Item>
 
                 <Nav.Item>
-                  <Nav.Link as={Link} to={"/cart"}>CART [0]</Nav.Link>
+                  <Nav.Link as={Link} to={"/cart"}>CART [{this.props.cart.length}]</Nav.Link>
                 </Nav.Item>
 
                 <Nav.Item>
@@ -132,7 +132,8 @@ class Header extends React.Component {
 
 function mapStateToProps(state) { //Accéder aux données de notre store dans les props
   return {
-    isLogged: state.isLogged
+    isLogged: state.isLogged,
+    cart: state.cartReducer
     
   };
 }
