@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
-import { addingCartStore } from '../actions/cartActions';
+import { addingCartStore, setQuantity } from '../actions/cartActions';
 
 // import {getProducts} from '../actions/productsActions'
 
@@ -17,8 +17,16 @@ class ProductPage extends Component {
     }
 
 
-    addToCart = (id) => {
-        this.props.addingCartStore(id)
+    addToCart = (product) => {
+        if (this.props.cart.length > 0 && this.props.cart.filter(e => e.id === product.id)) {
+        let currentProduct = this.props.cart.filter(e => e.id === product.id)
+        console.log("current", currentProduct);
+         this.props.setQuantity(product.id, currentProduct[0].qty + 1)
+
+        }   else {
+            product.qty = 1
+            this.props.addingCartStore(product)
+        }
     }
 
 
@@ -36,7 +44,7 @@ class ProductPage extends Component {
             <p>{product.prix}</p>
             <p>{product.stock}</p>
 
-            <Button variant="warning" type="submit" onClick={() => this.addToCart(product.id)}>
+            <Button variant="warning" type="submit" onClick={() => this.addToCart(product)}>
                 Add to cart
             </Button>
 
@@ -50,7 +58,8 @@ class ProductPage extends Component {
 function mapStateToProps(state) { //Accéder aux données de notre store dans les props
     return {
         token: state.isLogged.token,
-        products: state.products.products
+        products: state.products.products,
+        cart: state.cartReducer
         
 
     };
@@ -58,7 +67,8 @@ function mapStateToProps(state) { //Accéder aux données de notre store dans le
   
   const mapDispatchToProps = { //Permettre de modifier les données par l'appel des actions en les appelant par les props
 //   getProducts 
-    addingCartStore                // A l'appel, de this.props.userLogin -> isUserLogged  = true
+    addingCartStore,
+    setQuantity                // A l'appel, de this.props.userLogin -> isUserLogged  = true
 }
 
 

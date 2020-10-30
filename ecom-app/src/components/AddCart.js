@@ -1,31 +1,26 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table'
-
+import {deleteProduct} from '../actions/cartActions'
 import { connect } from 'react-redux';
 
 class AddCart extends Component {
   constructor() {
     super();
     this.state = {
-      products: []
     }
   }
-
-  displayCart() {
-    let productArray = []
-    this.props.cart.forEach(element => {
-      productArray.push(this.props.products.find(elem => elem.id === element))
-      console.log(productArray)
-      
-    });
+  deleteOnClick(id) {
+    this.props.deleteProduct(id)
   }
+
     render() {
+      console.log(this.props.cart);
         return (
             <div>
                 <h1>Cart</h1>
 
-                {/* <Table striped bordered hover>
+                <Table striped bordered hover>
   <thead>
     <tr>
       <th>Name</th>
@@ -37,10 +32,11 @@ class AddCart extends Component {
     </tr>
   </thead>
 
-  <tbody> */
+  <tbody> 
         
-  /* {this.props.products.filter(element => element.id === this.props.id).map((tab) => (
-    <tr key={tab.id}>
+  {this.props.cart.length ? this.props.cart.map( tab => (
+      
+      <tr key={tab.id}>
       <td>{tab.titre}</td>
       <td>{tab.description}</td>
       <td>{tab.categorie}</td>
@@ -52,13 +48,21 @@ class AddCart extends Component {
     Remove
   </Button>
       </td>
+    </tr>)
+  
+  ) : null} 
+    <tr>
+      <td>Total</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{this.props.cart.length ? this.props.cart.reduce((accumulator, currentValue = null) => accumulator.prix + currentValue.prix) : 0}</td>
+      <td></td>
     </tr>
-  )
-  )} 
   </tbody>
-</Table>*/}
+</Table>
 
-{this.displayCart()}
+
 </div>
             
         );
@@ -66,7 +70,7 @@ class AddCart extends Component {
 }
 
 const mapDispatchToProps = { 
-    
+    deleteProduct
     }
     
     function mapStateToProps(state) { 
